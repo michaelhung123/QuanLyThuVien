@@ -1,0 +1,49 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Mar 26, 2023, 5:56:30 PM
+    Author     : dell
+*/
+VBox {
+    -fx-background-color: #9ba7b6;
+}
+TabPane{
+        -fx-background-color: #e8e8e8d7;
+
+}
+Pane.logo {
+    -fx-background-color: #b0b086;
+}
+Pane.pSearch{
+    -fx-border-color: #817d7d;
+    -fx-border-radius: 10;
+}
+Label.logo {
+    -fx-font-weight: bold;
+  -fx-font-size: 27;
+
+}
+Button.btnSystem{
+    -fx-background-color: #1fc335;
+    -fx-font-weight: bold;
+}
+
+/*Quan ly doc gia */
+AnchorPane.qldg{
+    -fx-background-color: #aca36e;
+}
+.qldg Label {
+    -fx-font-weight: bold;
+}
+.Paneqldg{
+    -fx-border-color: #bbbbb9;
+    -fx-border-radius: 20;
+}
+.qldg TextField{
+    -fx-background-color: #e9e6ce;
+}
+.qldg ComboBox{
+    -fx-background-color: #e9e6ce;
+}

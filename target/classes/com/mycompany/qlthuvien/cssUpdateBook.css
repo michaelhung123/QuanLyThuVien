@@ -1,0 +1,23 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Mar 24, 2023, 1:41:08 PM
+    Author     : dell
+*/
+/*Quan ly Sach */
+AnchorPane{
+     -fx-background-color: #e8e8e8d7;
+}
+Label.lbTitle {
+    -fx-font-size: 27;
+    -fx-font-weight: bold;
+    -fx-text-fill: red;
+}
+TextField.txtMaSach {
+    -fx-background-color: lightgrey;
+    -fx-font-weight: bold;
+
+}
+

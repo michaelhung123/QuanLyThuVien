@@ -1,0 +1,29 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Mar 30, 2023, 6:36:23 PM
+    Author     : dell
+*/
+
+/*Quan ly doc gia */
+AnchorPane.qldg{
+    -fx-background-color: #aca36e;
+}
+.qldg Label {
+    -fx-font-weight: bold;
+}
+.Paneqldg{
+    -fx-border-color: #bbbbb9;
+    -fx-border-radius: 20;
+}
+.qldg TextField{
+    -fx-background-color: #e9e6ce;
+}
+.qldg DatePicker{
+    -fx-background-color: #e9e6ce;
+}
+.qldg ComboBox{
+    -fx-background-color: #e9e6ce;
+}

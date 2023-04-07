@@ -1,0 +1,7 @@
+- Sách (CreateBy,CreateDay, UpdateBY, UpdateDay,DeleteBy,DeleteDay -- Ai thêm, ai xóa) 
+- thể loại sách (khoa ngoai)
+ +Vị trí sách (Mã vt, tên vt,#theloaisach) 
+
+-USER 
+ +Role ( thủ thư (admin), học sinh, giáo viên)
+ 

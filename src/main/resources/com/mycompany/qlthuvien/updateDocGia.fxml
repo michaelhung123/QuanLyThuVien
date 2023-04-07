@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="scenePane" prefHeight="360.0" prefWidth="631.0" stylesheets="@cssUpdateBook.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.qlthuvien.updateDocGiaController">
+   <children>
+      <Label alignment="CENTER" layoutX="87.0" layoutY="14.0" prefHeight="39.0" prefWidth="416.0" styleClass="lbTitle" text="THÔNG TIN CẬP NHẬT" textFill="#f20d0d">
+         <effect>
+            <DropShadow color="#ab5757" />
+         </effect>
+         <font>
+            <Font name="Arial" size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="310.0" layoutY="76.0" text="Họ tên:" />
+      <TextField fx:id="txtHoTen" layoutX="388.0" layoutY="69.0" prefHeight="0.0" prefWidth="190.0" />
+      <Label layoutX="310.0" layoutY="131.0" text="Ngày sinh:" />
+      <Label layoutX="14.0" layoutY="135.0" text="Giới tính:" />
+      <Label layoutX="310.0" layoutY="243.0" prefHeight="27.0" prefWidth="66.0" text="Bộ phận:" />
+      <Label layoutX="14.0" layoutY="75.0" prefHeight="27.0" prefWidth="66.0" text="Mã độc giả:" />
+      <TextField fx:id="txtMaDocGia" layoutX="89.0" layoutY="69.0" prefHeight="16.0" prefWidth="190.0" />
+      <Button alignment="TOP_LEFT" layoutX="187.0" layoutY="302.0" mnemonicParsing="false" onAction="#updateDocGiaHandler" prefHeight="40.0" prefWidth="105.0" text="Cập nhật" textAlignment="CENTER">
+         <effect>
+            <InnerShadow color="#0073ff" />
+         </effect>
+         <graphic>
+            <ImageView fitHeight="51.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../image/update.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ComboBox fx:id="cbBoPhan" layoutX="385.0" layoutY="237.0" prefHeight="39.0" prefWidth="190.0" />
+      <Button layoutX="350.0" layoutY="302.0" mnemonicParsing="false" onAction="#clearHandler" prefHeight="39.0" prefWidth="83.0" text="Nhập lại">
+         <effect>
+            <InnerShadow color="#868383" height="6.46" radius="1.115" width="0.0">
+               <input>
+                  <InnerShadow />
+               </input>
+            </InnerShadow>
+         </effect>
+         <graphic>
+            <ImageView fitHeight="23.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../image/clear.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Label layoutX="14.0" layoutY="250.0" prefHeight="27.0" prefWidth="71.0" styleClass="lbSach" text="Email" />
+      <TextField fx:id="txtDiaChi" layoutX="388.0" layoutY="182.0" prefHeight="0.0" prefWidth="190.0" />
+      <Label layoutX="304.0" layoutY="188.0" text="Địa chỉ:" />
+      <TextField fx:id="txtEmail" layoutX="85.0" layoutY="237.0" prefHeight="0.0" prefWidth="190.0" />
+      <Label layoutX="14.0" layoutY="188.0" prefHeight="27.0" prefWidth="72.0" text="Phone:" />
+      <TextField fx:id="txtPhone" layoutX="86.0" layoutY="182.0" prefHeight="0.0" prefWidth="190.0" />
+      <DatePicker fx:id="txtNgaySinh" layoutX="388.0" layoutY="127.0" prefHeight="39.0" prefWidth="190.0" />
+      <RadioButton fx:id="rdbNu" layoutX="203.0" layoutY="133.0" mnemonicParsing="false" text="Nữ" />
+      <RadioButton fx:id="rdbNam" layoutX="100.0" layoutY="133.0" mnemonicParsing="false" text="Nam" />
+   </children>
+   <effect>
+      <Glow level="0.0" />
+   </effect>
+</AnchorPane>
