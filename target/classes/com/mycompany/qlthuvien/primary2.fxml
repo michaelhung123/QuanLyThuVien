@@ -137,6 +137,11 @@
                 <fx:include source="QuanLyMuonTra.fxml" />
             </content>
             </Tab>
+            <Tab text="Báo cáo thống kê">
+              <content>
+                <fx:include source="QuanLyBaoCao.fxml" />
+            </content>
+            </Tab>
         </tabs>
       </TabPane>
    </children>

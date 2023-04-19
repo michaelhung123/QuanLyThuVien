@@ -13,6 +13,7 @@ import com.mycompany.pojo.PhieuMuon;
 import static com.mycompany.qlthuvien.AddBookController.c;
 import static com.mycompany.qlthuvien.AddBookController.s;
 import static com.mycompany.qlthuvien.DocGiaController.g;
+import static com.mycompany.qlthuvien.DocGiaController.selectedRow;
 import com.mycompany.services.BookService;
 import com.mycompany.services.PhieuMuonService;
 import java.io.IOException;
@@ -31,13 +32,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -50,6 +57,7 @@ import javafx.stage.Stage;
  */
 public class MuonTraController implements Initializable {
 
+    static PhieuMuon selectedRow = new PhieuMuon();
     static PhieuMuonService p = new PhieuMuonService();
     PhieuMuon pm = new PhieuMuon();
     @FXML
@@ -72,23 +80,44 @@ public class MuonTraController implements Initializable {
     private ComboBox<BoPhan> cbBoPhan;
     @FXML
     private Label lbShowName;
+    @FXML
+    private TextField txtSearchPM;
+    @FXML
+    private RadioButton rdbMaPhieu;
+    @FXML
 
     private ObservableList<PhieuMuon> tablePhieuMuonList;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            System.out.println("Init : " + pm.isActive());
             lbShowName.setText("Tất cả");
             List<DocGia> docGiaList = g.getIdDocGia(null);
             List<BoPhan> boPhanList = g.getBoPhan();
             this.cbBoPhan.setItems(FXCollections.observableList(boPhanList));
             this.cbDocGia.setItems(FXCollections.observableList(docGiaList));
+
+            // Thêm sự kiện lắng nghe vào ComboBox
+            cbDocGia.valueProperty().addListener((observable, oldValue, newValue) -> {
+                pm.setActive(true); // Đặt lại giá trị của biến pm.isActive() về true
+                System.out.println(pm.isActive());
+            });
+
             loadTableColumnsBook();
             loadTableDataBook(null);
             loadTableColumnsPhieuMuon();
             loadTableDataPhieuMuon(null);
         } catch (SQLException ex) {
             Logger.getLogger(MuonTraController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void searchPhieuMuons(ActionEvent evt) throws SQLException {
+        ToggleGroup filterGroup = new ToggleGroup();
+        this.rdbMaPhieu.setToggleGroup(filterGroup);
+        if (this.rdbMaPhieu.isSelected()) {
+            loadTableDataPhieuMuonId(this.txtSearchPM.getText());
         }
     }
 
@@ -126,10 +155,22 @@ public class MuonTraController implements Initializable {
     }
 
     public void addPhieuMuonHandler(ActionEvent evt) throws SQLException {
+        System.out.println("Them : " + pm.isActive());
+        if (cbDocGia.getValue().toString().equals(pm.getDocGiaId()) && pm.isActive() == false) {
+            MessageBox.getBox("Notification", "Bạn đã đặt sách rồi! đừng mượn", Alert.AlertType.WARNING).show();
+            return;
+        }
+        //Kiem tra so luong phieu muon cua doc gia
+        if (p.checkSoLuongPhieuMuon(cbDocGia.getValue().toString()) == true) {
+            MessageBox.getBox("Notification", "Số lượng phiếu mượn của độc giả không được vượt quá 5", Alert.AlertType.WARNING).show();
+            return;
+        }
+
         if (tbViewBook.getSelectionModel().getSelectedItem() == null || cbDocGia.getSelectionModel().getSelectedItem() == null || txtHanTra.getValue() == null) {
             MessageBox.getBox("Notification", "Vui lòng nhập đầy đủ thông tin!", Alert.AlertType.WARNING).show();
             return;
         }
+
         try {
             Book selectedBook = tbViewBook.getSelectionModel().getSelectedItem();
             DocGia selectedCombobox = cbDocGia.getSelectionModel().getSelectedItem();
@@ -140,16 +181,19 @@ public class MuonTraController implements Initializable {
             pm.setDocGiaId(cbDocGia.getValue().toString());
             pm.setTenDocGia(selectedCombobox.getName());
             pm.setHanTra(date);
-
+            pm.setActive(true);
+            //Upate So Luong cua Phieu Muon
             boolean found = false;
             for (PhieuMuon pmItem : tbViewPhieuMuon.getItems()) {
                 if (pmItem.getBookId() == selectedBook.getId() && pmItem.getDocGiaId().equals(cbDocGia.getValue().toString())) {
                     found = true;
                     p.updateSLPhieuMuon(pmItem.getSoLuong() + 1, pm.getHanTra(), selectedBook.getId(), cbDocGia.getValue().toString());
                     this.loadTableDataPhieuMuon(null);
+
                     break;
                 }
             }
+
             //Kiem tra dieu kien ngay muon > han tra
             LocalDate dateNgayMuon = LocalDate.now();
             if (localDate.isBefore(dateNgayMuon)) {
@@ -170,9 +214,68 @@ public class MuonTraController implements Initializable {
         }
     }
 
+    public void datTruocHandler(ActionEvent evt) throws SQLException {
+        System.out.println("Dat truoc: " + pm.isActive());
+        if (cbDocGia.getValue().toString().equals(pm.getDocGiaId()) && pm.isActive() == true) {
+            MessageBox.getBox("Notification", "Mượn rồi, đừng đặt trước", Alert.AlertType.WARNING).show();
+            return;
+        }
+        //Kiem tra so luong phieu muon cua doc gia
+        if (p.checkSoLuongPhieuMuon(cbDocGia.getValue().toString()) == true) {
+            MessageBox.getBox("Notification", "Số lượng phiếu mượn của độc giả không được vượt quá 5", Alert.AlertType.WARNING).show();
+            return;
+        }
+
+        if (tbViewBook.getSelectionModel().getSelectedItem() == null || cbDocGia.getSelectionModel().getSelectedItem() == null || txtHanTra.getValue() == null) {
+            MessageBox.getBox("Notification", "Vui lòng nhập đầy đủ thông tin!", Alert.AlertType.WARNING).show();
+            return;
+        }
+        try {
+            Book selectedBook = tbViewBook.getSelectionModel().getSelectedItem();
+            DocGia selectedCombobox = cbDocGia.getSelectionModel().getSelectedItem();
+            LocalDate localDate = txtHanTra.getValue();
+            Date date = Date.valueOf(localDate);
+            pm.setBookId(selectedBook.getId());
+            pm.setTenSach(selectedBook.getName());
+            pm.setDocGiaId(cbDocGia.getValue().toString());
+            pm.setTenDocGia(selectedCombobox.getName());
+            pm.setHanTra(date);
+            pm.setActive(false);
+            //Upate So Luong cua Phieu Muon
+            boolean found = false;
+            for (PhieuMuon pmItem : tbViewPhieuMuon.getItems()) {
+                if (pmItem.getBookId() == selectedBook.getId() && pmItem.getDocGiaId().equals(cbDocGia.getValue().toString())) {
+                    found = true;
+                    p.updateSLPhieuMuon(pmItem.getSoLuong() + 1, pm.getHanTra(), selectedBook.getId(), cbDocGia.getValue().toString());
+                    this.loadTableDataPhieuMuon(null);
+
+                    break;
+                }
+            }
+
+            //Kiem tra dieu kien ngay muon > han tra
+            LocalDate dateNgayMuon = LocalDate.now();
+            if (localDate.isBefore(dateNgayMuon)) {
+                MessageBox.getBox("Notification", "Ngày mượn phải lớn hơn hạn trả!", Alert.AlertType.WARNING).show();
+                return;
+            }
+            if (!found) {
+                p.addPhieuMuon(pm);
+            }
+            if (this.tablePhieuMuonList == null) {
+                this.tablePhieuMuonList = FXCollections.observableArrayList();
+            }
+            this.loadTableDataPhieuMuon(null);
+            MessageBox.getBox("Notification", "Đặt trước sách thành công! Vui lòng đến lấy sách trước 48h", Alert.AlertType.INFORMATION).show();
+        } catch (SQLException ex) {
+            MessageBox.getBox("Notification", "Thêm phiếu mượn thất bại!", Alert.AlertType.ERROR).show();
+            Logger.getLogger(MuonTraController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void deletePhieuMuonHandler(ActionEvent evt) throws SQLException {
         if (tbViewPhieuMuon.getSelectionModel().getSelectedItem() == null) {
-            MessageBox.getBox("Notification", "Vui lòng tích chọn phiếu mượn trong danh sách để xóa", Alert.AlertType.WARNING).show();
+            MessageBox.getBox("Notification", "Vui lòng tích chọn phiếu mượn trong danh sách để trả", Alert.AlertType.WARNING).show();
             return;
         }
         try {
@@ -184,12 +287,32 @@ public class MuonTraController implements Initializable {
                 p.deletePhieuMuon(phieuMuonDelete);
             }
 
-            MessageBox.getBox("Notification", "Xóa phiếu mượn thành công!", Alert.AlertType.INFORMATION).show();
+            MessageBox.getBox("Notification", "Trả phiếu mượn thành công!", Alert.AlertType.INFORMATION).show();
         } catch (SQLException ex) {
-            MessageBox.getBox("Notification", "Xóa phiếu mượn thất bại!", Alert.AlertType.ERROR).show();
+            MessageBox.getBox("Notification", "Trả phiếu mượn thất bại!", Alert.AlertType.ERROR).show();
             Logger.getLogger(MuonTraController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+//     public void deletePhieuMuonHandler(ActionEvent evt) throws SQLException {
+//        if (tbViewPhieuMuon.getSelectionModel().getSelectedItem() == null) {
+//            MessageBox.getBox("Notification", "Vui lòng tích chọn phiếu mượn trong danh sách để trả", Alert.AlertType.WARNING).show();
+//            return;
+//        }
+//        try {
+//            int selectedIndex = tbViewPhieuMuon.getSelectionModel().getSelectedIndex();
+//            if (selectedIndex >= 0) {
+//                tablePhieuMuonList = tbViewPhieuMuon.getItems();  // tbViewPhieuMuon.getItems() trả về 1 đối tượng kiểu PhieuMuon
+//                PhieuMuon phieuMuonDelete = tablePhieuMuonList.get(selectedIndex);
+//                tablePhieuMuonList.remove(phieuMuonDelete);
+//                p.traPhieuMuon(2, phieuMuonDelete.getId());
+//            }
+//            MessageBox.getBox("Notification", "Trả phiếu mượn thành công!", Alert.AlertType.INFORMATION).show();
+//        } catch (SQLException ex) {
+//            MessageBox.getBox("Notification", "Trả phiếu mượn thất bại!", Alert.AlertType.ERROR).show();
+//            Logger.getLogger(MuonTraController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     private void loadTableColumnsBook() throws SQLException {
         TableColumn colId = new TableColumn("Mã sách");
@@ -320,7 +443,7 @@ public class MuonTraController implements Initializable {
 
         TableColumn colMaSach = new TableColumn("Mã sách");
         colMaSach.setCellValueFactory(new PropertyValueFactory("bookId"));
-        colMaSach.setPrefWidth(150);
+        colMaSach.setPrefWidth(80);
 
         TableColumn colMaDocGia = new TableColumn("Mã độc giả");
         colMaDocGia.setCellValueFactory(new PropertyValueFactory("docGiaId"));
@@ -336,7 +459,7 @@ public class MuonTraController implements Initializable {
 
         TableColumn colSoLuong = new TableColumn("Số lượng");
         colSoLuong.setCellValueFactory(new PropertyValueFactory("soLuong"));
-        colSoLuong.setPrefWidth(120);
+        colSoLuong.setPrefWidth(70);
 
         TableColumn colNgayMuon = new TableColumn("Ngày mượn");
         colNgayMuon.setCellValueFactory(new PropertyValueFactory("ngayMuon"));
@@ -346,7 +469,89 @@ public class MuonTraController implements Initializable {
         colHanTra.setCellValueFactory(new PropertyValueFactory("hanTra"));
         colHanTra.setPrefWidth(130);
 
-        this.tbViewPhieuMuon.getColumns().addAll(colId, colMaSach, colMaDocGia, colTenDocGia, colTenSach, colSoLuong, colNgayMuon, colHanTra);
+        TableColumn colActive = new TableColumn("Trạng thái");
+        colActive.setCellValueFactory(new PropertyValueFactory("active"));
+        colActive.setPrefWidth(120);
+        //Create and Check active of PhieuMuon
+        colActive.setCellFactory(column -> new TableCell<PhieuMuon, Boolean>() {
+            private boolean isActive;
+            private final Button btnAdd = new Button("Thêm");
+            private final Button btnDatTruoc = new Button("Đặt trước");
+
+            {
+                btnAdd.setOnAction(event -> {
+                    isActive = true;
+                    setText("Đang mượn");
+                });
+
+                btnDatTruoc.setOnAction(event -> {
+                    isActive = false;
+                    setText("Đặt trước");
+                });
+            }
+
+            @Override
+            protected void updateItem(Boolean isActive, boolean empty) {
+                super.updateItem(isActive, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    if (isActive ) {
+                        setText("Đang mượn");
+                    } else {
+                        setText("Đặt trước");
+                    }
+                    setGraphic(null);
+                }
+            }
+        });
+        TableColumn colTienPhat = new TableColumn("Tiền phạt");
+        colTienPhat.setCellValueFactory(new PropertyValueFactory("tienPhat"));
+        colTienPhat.setPrefWidth(100);
+
+        this.tbViewPhieuMuon.setRowFactory(tv -> {
+            TableRow<PhieuMuon> row = new TableRow<>();
+            // Tạo ContextMenu
+            ContextMenu contextMenu = new ContextMenu();
+            // Tạo updateItem "update" để update sách
+            MenuItem updateItem = new MenuItem("Thêm tiền phạt");
+            updateItem.setOnAction(e -> {
+                if (this.tbViewPhieuMuon.getSelectionModel().getSelectedItem() != null) {
+                    try {
+                        selectedRow = this.tbViewPhieuMuon.getSelectionModel().getSelectedItem();
+                        // Tạo Stage mới
+                        Stage stage = new Stage();
+                        // Tạo Scene mới
+                        Parent root = FXMLLoader.load(getClass().getResource("updateTienPhat.fxml"));
+                        Scene scene = new Scene(root);
+                        // Thiết lập Scene cho Stage mới
+                        stage.setScene(scene);
+                        stage.setTitle("Cập nhật tiền phạt");
+                        // Xử lý sự kiện khi Stage mới bị đóng lại
+                        stage.setOnHidden(event -> {
+                            try {
+                                loadTableDataPhieuMuon(null);
+                                MessageBox.getBox("Notification", "Cập nhật tiền phạt thành công!", Alert.AlertType.INFORMATION).show();
+                            } catch (SQLException ex) {
+                                MessageBox.getBox("Notification", "Cập nhật thất bại !", Alert.AlertType.ERROR).show();
+                                Logger.getLogger(MuonTraController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        });
+                        stage.show();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MuonTraController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+
+            // Thêm MenuItem vào ContextMenu
+            contextMenu.getItems().addAll(updateItem);
+            // Thiết lập ContextMenu cho TableRow
+            row.setContextMenu(contextMenu);
+            return row;
+        });
+        this.tbViewPhieuMuon.getColumns().addAll(colId, colMaSach, colMaDocGia, colTenDocGia, colTenSach, colSoLuong, colNgayMuon, colHanTra, colActive, colTienPhat);
     }
 
     private void loadTableDataDocGiaId(String kw) throws SQLException {
@@ -357,6 +562,12 @@ public class MuonTraController implements Initializable {
 
     private void loadTableDataPhieuMuon(String kw) throws SQLException {
         List<PhieuMuon> phieumuonList = p.getPhieuMuon(kw);
+        this.tbViewPhieuMuon.getItems().clear();
+        this.tbViewPhieuMuon.setItems(FXCollections.observableList(phieumuonList));
+    }
+    
+    private void loadTableDataPhieuMuonId(String kw) throws SQLException {
+        List<PhieuMuon> phieumuonList = p.searchPhieuMuonId(kw);
         this.tbViewPhieuMuon.getItems().clear();
         this.tbViewPhieuMuon.setItems(FXCollections.observableList(phieumuonList));
     }

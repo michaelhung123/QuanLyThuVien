@@ -11,6 +11,20 @@ import java.sql.Date;
  * @author dell
  */
 public class PhieuMuon {
+
+    /**
+     * @return the tienPhat
+     */
+    public double getTienPhat() {
+        return tienPhat;
+    }
+
+    /**
+     * @param tienPhat the tienPhat to set
+     */
+    public void setTienPhat(double tienPhat) {
+        this.tienPhat = tienPhat;
+    }
     private int id;
     private int bookId;
     private String docGiaId;
@@ -19,7 +33,9 @@ public class PhieuMuon {
     private Date hanTra;
     private String tenDocGia;
     private String tenSach;
-
+    private double tienPhat;
+    private boolean active = true;
+    
     public PhieuMuon() {
     }
     
@@ -38,8 +54,8 @@ public class PhieuMuon {
         this.ngayMuon = ngayMuon;
         this.hanTra = hanTra;
     }
-
-    public PhieuMuon(int id, int bookId, String docGiaId, int soLuong, Date ngayMuon, Date hanTra, String tenDocGia, String tenSach) {
+    
+    public PhieuMuon(int id, int bookId, String docGiaId, int soLuong, Date ngayMuon, Date hanTra, String tenDocGia, String tenSach, double tienPhat, boolean active) {
         this.id = id;
         this.bookId = bookId;
         this.docGiaId = docGiaId;
@@ -48,7 +64,13 @@ public class PhieuMuon {
         this.hanTra = hanTra;
         this.tenDocGia = tenDocGia;
         this.tenSach = tenSach;
+        this.tienPhat = tienPhat;
+        this.active = active;
     }
+     
+     public PhieuMuon(boolean active){
+         this.active = active;
+     }
     
 
     /**
@@ -161,5 +183,19 @@ public class PhieuMuon {
      */
     public void setTenSach(String tenSach) {
         this.tenSach = tenSach;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

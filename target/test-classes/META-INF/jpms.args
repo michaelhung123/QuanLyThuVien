@@ -1,0 +1,4 @@
+--patch-module
+com.mycompany.qlthuvien=_
+--add-reads
+com.mycompany.qlthuvien=ALL-UNNAMED

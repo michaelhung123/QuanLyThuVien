@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: ConnectionTester
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.71 s <<< FAILURE! - in ConnectionTester
+ConnectionTester  Time elapsed: 0.708 s  <<< ERROR!
+java.lang.ArithmeticException
+	at ConnectionTester.openConn(ConnectionTester.java:39)
+

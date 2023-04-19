@@ -74,7 +74,6 @@ public class AddBookController implements Initializable {
     @FXML
     private Button btnHome;
     @FXML
-    private VBox sceneVBox;
     private ObservableList<Book> tableBookList;
 
     @Override

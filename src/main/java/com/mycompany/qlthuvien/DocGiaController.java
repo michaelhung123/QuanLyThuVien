@@ -144,6 +144,10 @@ public class DocGiaController implements Initializable {
     }
 
     public void deleteDocGiaHandler(ActionEvent evt) throws SQLException {
+        if (tbViewDocGia.getSelectionModel().getSelectedItem() == null) {
+            MessageBox.getBox("Notification", "Vui lòng tích chọn độc giả trong danh sách để xóa", Alert.AlertType.WARNING).show();
+            return;
+        }
         try {
             int selectedIndex = tbViewDocGia.getSelectionModel().getSelectedIndex();
             if (selectedIndex >= 0) {
