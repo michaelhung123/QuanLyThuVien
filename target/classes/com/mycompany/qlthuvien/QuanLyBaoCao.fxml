@@ -13,17 +13,28 @@
 
 <AnchorPane prefHeight="528.0" prefWidth="1053.0" styleClass="qldg" stylesheets="@cssMainBook.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.qlthuvien.ReportController">
    <children>
-      <PieChart fx:id="chartReport" layoutX="346.0" layoutY="22.0" prefHeight="281.0" prefWidth="526.0" />
+      <PieChart fx:id="chartReport" layoutX="337.0" layoutY="22.0" prefHeight="281.0" prefWidth="512.0" />
       <Pane layoutX="1.0" layoutY="296.0" prefHeight="228.0" prefWidth="1053.0">
          <children>
-            <TableView fx:id="tbViewPhieuMuon" layoutX="-2.0" layoutY="25.0" prefHeight="196.0" prefWidth="1053.0" />
+            <TableView fx:id="tbViewPhieuMuon" layoutY="32.0" prefHeight="196.0" prefWidth="1053.0" />
          </children>
       </Pane>
-      <Button layoutX="924.0" layoutY="244.0" mnemonicParsing="false" onAction="#reFresh" prefHeight="40.0" prefWidth="104.0" text="Làm mới" />
-      <Label alignment="CENTER" layoutX="29.0" layoutY="22.0" prefHeight="117.0" prefWidth="317.0" text="BIỂU ĐỒ THỐNG KÊ PHIẾU MƯỢN" textFill="#cd0101" underline="true">
+      <Button layoutX="885.0" layoutY="244.0" mnemonicParsing="false" onAction="#reFresh" prefHeight="42.0" prefWidth="108.0" styleClass="btnSystem" text="Làm mới" />
+      <Label alignment="CENTER" layoutX="14.0" layoutY="22.0" prefHeight="117.0" prefWidth="317.0" text="BIỂU ĐỒ THỐNG KÊ PHIẾU MƯỢN" textFill="#cd0101">
          <effect>
             <Reflection bottomOpacity="0.13" />
          </effect>
       </Label>
+      <Pane layoutX="861.0" layoutY="36.0" prefHeight="148.0" prefWidth="185.0" styleClass="paneReport">
+         <children>
+            <Label layoutX="14.0" layoutY="44.0" text="Sách:" />
+            <Label fx:id="lbThongkeSach" layoutX="114.0" layoutY="45.0" text="&quot;&quot;" textFill="RED" />
+            <Label contentDisplay="CENTER" layoutX="11.0" layoutY="14.0" prefHeight="27.0" prefWidth="162.0" text="THỐNG KÊ CHUNG" textFill="#bc0000" />
+            <Label fx:id="lbThongkeDocGia" layoutX="114.0" layoutY="74.0" text="&quot;&quot;" textFill="RED" />
+            <Label layoutX="14.0" layoutY="73.0" text="Độc giả:" />
+            <Label layoutX="15.0" layoutY="100.0" text="Phiếu mượn:" />
+            <Label fx:id="lbThongkePhieuMuon" layoutX="115.0" layoutY="101.0" text="&quot;&quot;" textFill="RED" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

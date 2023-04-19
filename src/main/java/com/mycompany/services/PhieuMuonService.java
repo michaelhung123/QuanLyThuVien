@@ -224,5 +224,19 @@ public class PhieuMuonService {
         }
         return total;
     }
+    
+    public int getTotalPhieuMuon() throws SQLException{
+        int total = 0;
+        try (Connection conn = JdbcUtils.getConn()) {
+            String sql = "SELECT COUNT(id) FROM phieumuon";
+            PreparedStatement stm = conn.prepareCall(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+               total = rs.getInt(1);
+            }
+        }
+        return total;
+    }
+
 
 }

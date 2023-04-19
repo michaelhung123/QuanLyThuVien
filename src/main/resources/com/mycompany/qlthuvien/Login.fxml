@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -8,21 +10,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="sceneLogin" prefHeight="333.0" prefWidth="526.0" stylesheets="@cssUpdateBook.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.qlthuvien.HomeController">
+<AnchorPane id="AnchorPane" fx:id="sceneLogin" prefHeight="417.0" prefWidth="922.0" styleClass="bgLogin" stylesheets="@cssMainBook.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.qlthuvien.HomeController">
    <children>
-      <Label alignment="CENTER" layoutX="61.0" layoutY="14.0" prefHeight="39.0" prefWidth="416.0" styleClass="lbTitle" text="ĐĂNG NHẬP" textFill="#f20d0d">
-         <effect>
-            <DropShadow color="#ab5757" />
-         </effect>
+      <ImageView fitHeight="340.0" fitWidth="400.0" layoutX="49.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../image/BACKGROUND.PNG" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="67.0" layoutY="14.0" prefHeight="52.0" prefWidth="806.0" text="CHÀO MỪNG BẠN ĐẾN VỚI THƯ VIÊN HKT LIBRABRY" textAlignment="CENTER" textFill="#00637c">
          <font>
-            <Font name="Arial" size="27.0" />
+            <Font name="Algerian" size="30.0" />
          </font>
+         <effect>
+            <BoxBlur height="1.0" width="0.5" />
+         </effect>
       </Label>
-      <Label layoutX="54.0" layoutY="97.0" prefHeight="39.0" prefWidth="90.0" text="Tài khoản:" />
-      <TextField fx:id="txtTaiKhoan" layoutX="145.0" layoutY="97.0" prefHeight="39.0" prefWidth="260.0" />
-      <Label layoutX="54.0" layoutY="173.0" prefHeight="39.0" prefWidth="90.0" text="Mật khẩu:" />
-      <Button fx:id="btnLogin" layoutX="219.0" layoutY="242.0" mnemonicParsing="false" onAction="#moveLogin" text="Đăng nhập" />
-      <TextField fx:id="txtMatKhau" layoutX="145.0" layoutY="173.0" prefHeight="39.0" prefWidth="260.0" />
+      <Pane layoutX="388.0" layoutY="85.0" prefHeight="302.0" prefWidth="445.0" style="-fx-border-color: black;">
+         <children>
+            <Label alignment="CENTER" layoutX="15.0" layoutY="14.0" prefHeight="39.0" prefWidth="416.0" styleClass="lbTitle" text="ĐĂNG NHẬP" textFill="#f20d0d">
+               <effect>
+                  <DropShadow color="#ab5757" />
+               </effect>
+               <font>
+                  <Font name="Arial" size="27.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="83.0" prefHeight="39.0" prefWidth="90.0" text="Tài khoản:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txtTaiKhoan" layoutX="117.0" layoutY="83.0" prefHeight="39.0" prefWidth="260.0" />
+            <Label layoutX="14.0" layoutY="141.0" prefHeight="39.0" prefWidth="90.0" text="Mật khẩu:">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnLogin" layoutX="150.0" layoutY="221.0" mnemonicParsing="false" onAction="#moveLogin" prefHeight="39.0" prefWidth="130.0" styleClass="btnSystem" text="Đăng nhập" />
+            <TextField fx:id="txtMatKhau" layoutX="117.0" layoutY="141.0" prefHeight="39.0" prefWidth="260.0" />
+         </children>
+      </Pane>
    </children>
    <effect>
       <Glow level="0.0" />

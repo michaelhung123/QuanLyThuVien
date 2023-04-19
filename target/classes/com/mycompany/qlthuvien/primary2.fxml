@@ -41,7 +41,7 @@
         <tabs>
           <Tab text="Quản lý sách">
             <content>
-              <AnchorPane styleClass="qlsach">
+              <AnchorPane>
                      <children>
                         <Label layoutX="319.0" layoutY="52.0" styleClass="lbSach" text="Tác giả:" />
                         <Label layoutX="319.0" layoutY="106.0" styleClass="lbSach" text="Mô tả:" />
@@ -75,7 +75,7 @@
                         <TextField fx:id="txtMoTa" layoutX="425.0" layoutY="100.0" prefHeight="33.0" prefWidth="206.0" />
                         <TextField fx:id="txtTacGia" layoutX="425.0" layoutY="46.0" prefHeight="33.0" prefWidth="206.0" AnchorPane.topAnchor="46.0" />
                         <DatePicker fx:id="txtNgayNhap" layoutX="425.0" layoutY="216.0" prefHeight="33.0" prefWidth="206.0" />
-                        <ComboBox fx:id="cbViTri" layoutX="96.0" layoutY="168.0" prefHeight="33.0" prefWidth="206.0" />
+                        <ComboBox fx:id="cbViTri" layoutX="96.0" layoutY="168.0" prefHeight="32.0" prefWidth="206.0" />
                         <Button layoutX="483.0" layoutY="271.0" mnemonicParsing="false" onAction="#clearHandler" prefHeight="39.0" prefWidth="83.0" text="Nhập lại">
                            <graphic>
                               <ImageView fitHeight="23.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
@@ -118,7 +118,7 @@
                               <Font name="Arial Black" size="20.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="cbCategory" layoutX="96.0" layoutY="216.0" prefHeight="48.0" prefWidth="206.0" />
+                        <ComboBox fx:id="cbCategory" layoutX="96.0" layoutY="216.0" prefHeight="25.0" prefWidth="206.0" />
                         <Label layoutX="14.0" layoutY="222.0" prefHeight="27.0" prefWidth="71.0" styleClass="lbSach" text="Thể loại" />
                      </children>
                      <effect>

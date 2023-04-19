@@ -166,5 +166,18 @@ public class BookService {
         }
         return bookList;
     }
+    
+    public int getTotalBook() throws SQLException{
+        int total = 0;
+        try (Connection conn = JdbcUtils.getConn()) {
+            String sql = "SELECT COUNT(id) FROM book";
+            PreparedStatement stm = conn.prepareCall(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+               total = rs.getInt(1);
+            }
+        }
+        return total;
+    }
 
 }

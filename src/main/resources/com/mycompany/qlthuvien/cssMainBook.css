@@ -7,12 +7,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     Author     : dell
 */
 VBox {
-    -fx-background-color: #9ba7b6;
+    -fx-background-color: #1fc335;
 }
 TabPane{
-        -fx-background-color: #e8e8e8d7;
+        -fx-background-color: #aca36e;
 
 }
+
+
 Pane.logo {
     -fx-background-color: #b0b086;
 }
@@ -46,4 +48,18 @@ AnchorPane.qldg{
 }
 .qldg ComboBox{
     -fx-background-color: #e9e6ce;
+}
+
+AnchorPane.bgLogin{
+    -fx-background-color: #989959;
+}
+
+TableView {
+    -fx-background-color:#1fc335
+}
+
+Pane.paneReport{
+    -fx-border-color: #c14500;
+    -fx-border-radius: 20;
+
 }

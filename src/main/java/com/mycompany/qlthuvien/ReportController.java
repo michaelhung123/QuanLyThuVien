@@ -4,13 +4,9 @@
  */
 package com.mycompany.qlthuvien;
 
-import com.dht.utils.MessageBox;
-import com.mycompany.pojo.BoPhan;
-import com.mycompany.pojo.DocGia;
 import com.mycompany.pojo.PhieuMuon;
+import static com.mycompany.qlthuvien.AddBookController.s;
 import static com.mycompany.qlthuvien.DocGiaController.g;
-import static com.mycompany.qlthuvien.MuonTraController.p;
-import static com.mycompany.qlthuvien.MuonTraController.selectedRow;
 import com.mycompany.services.PhieuMuonService;
 import java.io.IOException;
 import java.net.URL;
@@ -29,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -46,6 +43,12 @@ public class ReportController implements Initializable {
     @FXML
     private TableView<PhieuMuon> tbViewPhieuMuon;
     ObservableList<PieChart.Data> pieChartData;
+    @FXML
+    private Label lbThongkeSach;
+    @FXML
+    private Label lbThongkeDocGia;
+    @FXML
+    private Label lbThongkePhieuMuon;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,13 +56,17 @@ public class ReportController implements Initializable {
             loadTableColumnsPhieuMuon();
             loadTableDataPhieuMuon(null);
             loadPieChartData();
+
+            this.lbThongkeSach.setText(String.valueOf(s.getTotalBook()));
+            this.lbThongkeDocGia.setText(String.valueOf(g.getTotalDocGia()));
+            this.lbThongkePhieuMuon.setText(String.valueOf(p.getTotalPhieuMuon()));
         } catch (SQLException ex) {
             Logger.getLogger(ReportController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void loadTableColumnsPhieuMuon() throws SQLException {
- TableColumn colId = new TableColumn("Mã phiếu");
+        TableColumn colId = new TableColumn("Mã phiếu");
         colId.setCellValueFactory(new PropertyValueFactory("id"));
         colId.setPrefWidth(70);
 
@@ -119,7 +126,7 @@ public class ReportController implements Initializable {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    if (isActive ) {
+                    if (isActive) {
                         setText("Đang mượn");
                     } else {
                         setText("Đặt trước");
@@ -175,6 +182,10 @@ public class ReportController implements Initializable {
         chartReport.getData().clear();
         chartReport.setData(pieChartData);
         loadPieChartData();
+
+        this.lbThongkeSach.setText(String.valueOf(s.getTotalBook()));
+        this.lbThongkeDocGia.setText(String.valueOf(g.getTotalDocGia()));
+        this.lbThongkePhieuMuon.setText(String.valueOf(p.getTotalPhieuMuon()));
     }
 
 }

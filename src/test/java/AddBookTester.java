@@ -2,31 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-import com.dht.utils.MessageBox;
 import com.mycompany.pojo.Book;
-import com.mycompany.pojo.Category;
-import com.mycompany.pojo.ViTri;
-import com.mycompany.qlthuvien.AddBookController;
 import com.mycompany.services.BookService;
 import com.mycompany.services.JdbcUtils;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -64,7 +50,7 @@ public class AddBookTester {
 
     @Test
     public void tesAddSuccessful() {
-        Book b = new Book(1, "Quoc Hung", "DHT", "Tester", 2021, "HCM", Date.valueOf("23/02/2022"), "Tang1-K1", 1);
+        Book b = new Book(1, "Quoc Hung", "DHT", "Tester", 2021, "HCM", Date.valueOf("2022-02-23"), "Tang1-K1", 1);
         try {
             boolean actual = s.addBook(b);
             Assertions.assertTrue(actual);
@@ -85,14 +71,13 @@ public class AddBookTester {
             Assertions.assertNotNull(rs.next());
             while (rs.next()) {
                 Assertions.assertEquals(b.getId(), rs.getInt("id"));
-                Assertions.assertEquals(b.getId(), rs.getString("name"));
-                Assertions.assertEquals(b.getId(), rs.getString("tacgia"));
-                Assertions.assertEquals(b.getId(), rs.getString("mota"));
-                Assertions.assertEquals(b.getId(), rs.getInt("namxb"));
-                Assertions.assertEquals(b.getId(), rs.getDate("ngaynhap"));
-                Assertions.assertEquals(b.getId(), rs.getString("vitri_new"));
-                Assertions.assertEquals(b.getId(), rs.getInt("category_id"));
-                Assertions.assertEquals(b.getId(), rs.getInt("id"));
+                Assertions.assertEquals(b.getName(), rs.getString("name"));
+                Assertions.assertEquals(b.getTacGia(), rs.getString("tacgia"));
+                Assertions.assertEquals(b.getMoTa(), rs.getString("mota"));
+                Assertions.assertEquals(b.getNamXB(), rs.getInt("namxb"));
+                Assertions.assertEquals(b.getNgayNhap(), rs.getDate("ngaynhap"));
+                Assertions.assertEquals(b.getViTri(), rs.getString("vitri_new"));
+                Assertions.assertEquals(b.getCategoryId(), rs.getInt("category_id"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(AddBookTester.class.getName()).log(Level.SEVERE, null, ex);

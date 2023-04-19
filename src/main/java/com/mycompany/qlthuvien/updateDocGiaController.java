@@ -70,6 +70,7 @@ public class updateDocGiaController implements Initializable {
         BoPhan bp = new BoPhan(selectedRow.getBoPhan());
         cbBoPhan.setValue(bp);
         txtMaDocGia.setText(selectedRow.getId());
+        txtEmail.setText(selectedRow.getEmail());
         txtHoTen.setText(selectedRow.getName());
         txtNgaySinh.setValue(selectedRow.getNgaySinh().toLocalDate());
         cbBoPhan.setValue(new BoPhan(selectedRow.getBoPhan()));

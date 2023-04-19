@@ -27,3 +27,6 @@ AnchorPane.qldg{
 .qldg ComboBox{
     -fx-background-color: #e9e6ce;
 }
+TableView {
+    -fx-background-color:#1fc335
+}

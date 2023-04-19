@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="AddBookTester" time="1.051" tests="1" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="AddBookTester" time="1.185" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17.0.2\bin"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\dell\AppData\Local\Temp\surefire2396159239222688331 2023-04-18T22-28-41_238-jvmRun1 surefire15692390514699926819tmp surefire_08522259469888194124tmp"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter C:\Users\dell\AppData\Local\Temp\surefire10872872631643336443 2023-04-19T13-36-36_553-jvmRun1 surefire15850432007738852918tmp surefire_017671728784340533681tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="AddBookTester"/>
     <property name="surefire.test.class.path" value="D:\NetBeans\Project\QLThuVien\target\test-classes;C:\Users\dell\.m2\repository\org\openjfx\javafx-controls\13\javafx-controls-13.jar;C:\Users\dell\.m2\repository\org\openjfx\javafx-graphics\13\javafx-graphics-13.jar;C:\Users\dell\.m2\repository\org\openjfx\javafx-base\13\javafx-base-13.jar;C:\Users\dell\.m2\repository\org\openjfx\javafx-fxml\13\javafx-fxml-13.jar;C:\Users\dell\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.2\junit-jupiter-engine-5.9.2.jar;C:\Users\dell\.m2\repository\org\junit\platform\junit-platform-engine\1.9.2\junit-platform-engine-1.9.2.jar;C:\Users\dell\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\dell\.m2\repository\org\junit\platform\junit-platform-commons\1.9.2\junit-platform-commons-1.9.2.jar;C:\Users\dell\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.2\junit-jupiter-api-5.9.2.jar;C:\Users\dell\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\dell\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.2\junit-jupiter-params-5.9.2.jar;C:\Users\dell\.m2\repository\com\mysql\mysql-connector-j\8.0.32\mysql-connector-j-8.0.32.jar;C:\Users\dell\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;"/>
@@ -59,9 +59,5 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="tesAddSuccessful" classname="AddBookTester" time="0.037">
-    <error type="java.lang.IllegalArgumentException">java.lang.IllegalArgumentException
-	at AddBookTester.tesAddSuccessful(AddBookTester.java:67)
-</error>
-  </testcase>
+  <testcase name="tesAddSuccessful" classname="AddBookTester" time="0.184"/>
 </testsuite>

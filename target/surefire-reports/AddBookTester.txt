@@ -1,8 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: AddBookTester
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.051 s <<< FAILURE! - in AddBookTester
-tesAddSuccessful  Time elapsed: 0.037 s  <<< ERROR!
-java.lang.IllegalArgumentException
-	at AddBookTester.tesAddSuccessful(AddBookTester.java:67)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.185 s - in AddBookTester
