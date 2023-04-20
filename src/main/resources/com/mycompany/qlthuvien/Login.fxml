@@ -47,7 +47,7 @@
                </font>
             </Label>
             <Button fx:id="btnLogin" layoutX="150.0" layoutY="221.0" mnemonicParsing="false" onAction="#moveLogin" prefHeight="39.0" prefWidth="130.0" styleClass="btnSystem" text="Đăng nhập" />
-            <TextField fx:id="txtMatKhau" layoutX="117.0" layoutY="141.0" prefHeight="39.0" prefWidth="260.0" />
+            <PasswordField fx:id="txtMatKhau" layoutX="117.0" layoutY="141.0" prefHeight="39.0" prefWidth="260.0" />
          </children>
       </Pane>
    </children>

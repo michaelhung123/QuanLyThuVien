@@ -159,9 +159,9 @@ public class AddBookController implements Initializable {
             this.cbViTri.setValue(null);
             this.cbCategory.setValue(null);
             this.loadTableData(null);
-            MessageBox.getBox("Notification", "Add book successful", Alert.AlertType.INFORMATION).show();
+            MessageBox.getBox("Notification", "Thêm sách thành công!", Alert.AlertType.INFORMATION).show();
         } catch (SQLException ex) {
-            MessageBox.getBox("Notification", "Add book failed", Alert.AlertType.ERROR).show();
+            MessageBox.getBox("Notification", "Thêm sách thất bại!", Alert.AlertType.ERROR).show();
             Logger.getLogger(AddBookController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -180,9 +180,9 @@ public class AddBookController implements Initializable {
                 s.deleteBooks(bookDelete);
             }
 
-            MessageBox.getBox("Notification", "Remove book successfull", Alert.AlertType.INFORMATION).show();
+            MessageBox.getBox("Notification", "Xóa sách thành công!", Alert.AlertType.INFORMATION).show();
         } catch (SQLException ex) {
-            MessageBox.getBox("Notification", "Remove book failed", Alert.AlertType.ERROR).show();
+            MessageBox.getBox("Notification", "Xóa sách thất bại!", Alert.AlertType.ERROR).show();
             Logger.getLogger(AddBookController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

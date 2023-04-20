@@ -91,7 +91,6 @@ public class MuonTraController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            System.out.println("Init : " + pm.isActive());
             lbShowName.setText("Tất cả");
             List<DocGia> docGiaList = g.getIdDocGia(null);
             List<BoPhan> boPhanList = g.getBoPhan();
@@ -155,7 +154,6 @@ public class MuonTraController implements Initializable {
     }
 
     public void addPhieuMuonHandler(ActionEvent evt) throws SQLException {
-        System.out.println("Them : " + pm.isActive());
         if (cbDocGia.getValue().toString().equals(pm.getDocGiaId()) && pm.isActive() == false) {
             MessageBox.getBox("Notification", "Bạn đã đặt sách rồi! đừng mượn", Alert.AlertType.WARNING).show();
             return;
